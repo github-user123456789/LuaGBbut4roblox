@@ -84,7 +84,7 @@ end
 
 function Gameboy:run_until_vblank()
   local instructions = 0
-  local maxinstruct = 100000 * 10
+  local maxinstruct = 100000 * 1
   while self.io.ram[self.io.ports.LY] == 144 and instructions < maxinstruct do
     self:step()
     instructions = instructions + 1
