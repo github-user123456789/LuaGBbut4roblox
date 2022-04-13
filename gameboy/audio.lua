@@ -692,7 +692,7 @@ function Audio.new(modules)
       audio.buffer[next_sample] = sample_right
       next_sample = next_sample + 1
       if next_sample >= 1024 then
-        audio.__on_buffer_full(audio.buffer)
+        --audio.__on_buffer_full(audio.buffer)
         next_sample = 0
       end
       next_sample_cycle = next_sample_cycle + 128 --number of clocks per sample at 32 KHz
@@ -700,7 +700,7 @@ function Audio.new(modules)
   end
 
   audio.on_buffer_full = function(callback)
-    audio.__on_buffer_full = callback
+    --audio.__on_buffer_full = callback
   end
 
   audio.update = function()
