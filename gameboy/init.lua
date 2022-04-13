@@ -88,12 +88,12 @@ function Gameboy:run_until_vblank()
   while self.io.ram[self.io.ports.LY] == 144 and instructions < maxinstruct do
     self:step()
     instructions = instructions + 1
-    if instructions % 90000 == 0 then task.wait() end
+    if instructions % 50000 == 0 then task.wait() end
   end
   while self.io.ram[self.io.ports.LY] ~= 144 and instructions < maxinstruct do
     self:step()
     instructions = instructions + 1
-    if instructions % 90000 == 0 then task.wait() end
+    if instructions % 50000 == 0 then task.wait() end
   end
   --self.audio.update()
 end
