@@ -401,10 +401,9 @@ function LuaGB:draw_game_screen()
 	
 	if different > 0 then
 		UpdateMonitor(image_data); shouldwait = 100
-		print("rendering")
 	else
 		--task.wait()
-		shouldwait += 1
+		shouldwait += 50
 	end
 	lastdraw = pixels
 	lastraw = raw_image_data
