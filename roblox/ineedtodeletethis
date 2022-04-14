@@ -389,9 +389,10 @@ function LuaGB:draw_game_screen()
 				
 				image_data:setPixel(x, y, pixels[y][x][1], pixels[y][x][2], pixels[y][x][3], 255)
 			end
-		end; if y % 100 == 0 then task.wait() end
+		end; if different > 0 then if y % 100 == 0 then task.wait() end end
 	end
 	
+	print(different)
 	if different > 0 then
 		UpdateMonitor(image_data); shouldwait = 100
 	else
@@ -469,5 +470,5 @@ LuaGB:load_game("https://raw.githubusercontent.com/github-user123456789/LuaGBbut
 while love and script do
 	love.update()
 	love.draw()
-	if shouldwait % 100 == 0 then task.wait() end
+	task.wait()
 end
