@@ -360,7 +360,6 @@ function LuaGB:draw_game_screen()
 	local stride = width
 	
 	if not lastdraw then lastdraw = pixels; print("lastdraw didnt exist") end
-	if not lastraw then lastraw = raw_image_data; print("lastraw didnt exist") end
 	
 	local different = 0
 	for y = 0, 143 do
@@ -373,13 +372,7 @@ function LuaGB:draw_game_screen()
 				pixel.b = v_pixel[3]
 				pixel.a = 255
 				
-				local lr = lastraw[y][x][1]
-				local lg = lastraw[y][x][2]
-				local lb = lastraw[y][x][3]
-				
-				if pixel.r ~= lr and pixel.g ~= lg and pixel.b ~= lb then
-					different += 1;
-				end
+				different += 1
 			else
 				local r = pixels[y][x][1]
 				local g = pixels[y][x][2]
@@ -389,9 +382,9 @@ function LuaGB:draw_game_screen()
 				local lg = lastdraw[y][x][2]
 				local lb = lastdraw[y][x][3]
 				
-				if math.random(1, 150) == 1 then print(r, lr, g, lg, b, lb) end
+				if math.random(1, 25) == 1 then print(r, lr, g, lg, b, lb) end
 				if r ~= lr and g ~= lg and b ~= lb then
-					different += 1;
+					different += 1; print("diff")
 				end
 				
 				image_data:setPixel(x, y, pixels[y][x][1], pixels[y][x][2], pixels[y][x][3], 255)
