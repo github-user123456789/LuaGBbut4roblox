@@ -358,8 +358,8 @@ function LuaGB:draw_game_screen()
 	--local stride = image_data:getWidth()
 	local stride = width
 	
-	if not lastdraw then lastdraw = {} end
-	if not lastraw then lastraw = {} end
+	if not lastdraw then lastdraw = pixels end
+	if not lastraw then lastraw = raw_image_data end
 	
 	local different = 0
 	for y = 0, 143 do
