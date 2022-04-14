@@ -373,9 +373,9 @@ function LuaGB:draw_game_screen()
 				pixel.b = v_pixel[3]
 				pixel.a = 255
 				
-				local lr = lastdraw[y][x][1]
-				local lg = lastdraw[y][x][2]
-				local lb = lastdraw[y][x][3]
+				local lr = lastraw[y][x][1]
+				local lg = lastraw[y][x][2]
+				local lb = lastraw[y][x][3]
 				
 				if pixel.r ~= lr and pixel.g ~= lg and pixel.b ~= lb then
 					different += 1;
@@ -389,6 +389,7 @@ function LuaGB:draw_game_screen()
 				local lg = lastdraw[y][x][2]
 				local lb = lastdraw[y][x][3]
 				
+				if math.random(1, 150) == 1 then print(r, lr, g, lg, b, lb) end
 				if r ~= lr and g ~= lg and b ~= lb then
 					different += 1;
 				end
@@ -403,7 +404,7 @@ function LuaGB:draw_game_screen()
 		print("rendering")
 	else
 		--task.wait()
-		shouldwait += 10
+		shouldwait += 1
 	end
 	lastdraw = pixels
 	lastraw = raw_image_data
