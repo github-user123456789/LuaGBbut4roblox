@@ -351,6 +351,7 @@ function LuaGB:load_ram()
 end
 local lastdraw = nil
 local lastraw = nil
+local shouldwait = 0
 function LuaGB:draw_game_screen()
 	local pixels = self.gameboy.graphics.game_screen
 	--local image_data = self.game_screen_imagedata
@@ -358,8 +359,8 @@ function LuaGB:draw_game_screen()
 	--local stride = image_data:getWidth()
 	local stride = width
 	
-	if not lastdraw then lastdraw = pixels end
-	if not lastraw then lastraw = raw_image_data end
+	if not lastdraw then lastdraw = pixels; print("lastdraw didnt exist") end
+	if not lastraw then lastraw = raw_image_data; print("lastraw didnt exist") end
 	
 	local different = 0
 	for y = 0, 143 do
@@ -394,13 +395,15 @@ function LuaGB:draw_game_screen()
 				
 				image_data:setPixel(x, y, pixels[y][x][1], pixels[y][x][2], pixels[y][x][3], 255)
 			end
-		end; if y % 1000 == 0 then task.wait() end
+		end; if y % 100 == 0 then task.wait() end
 	end
 	
 	if different > 0 then
-		UpdateMonitor(image_data)
+		UpdateMonitor(image_data); shouldwait = 100
+		print("rendering")
 	else
-		task.wait(.05)
+		--task.wait()
+		shouldwait += 10
 	end
 	lastdraw = pixels
 	lastraw = raw_image_data
@@ -473,5 +476,5 @@ LuaGB:load_game("https://raw.githubusercontent.com/github-user123456789/LuaGBbut
 while love and script do
 	love.update()
 	love.draw()
-	task.wait()
+	if shouldwait % 100 == 0 then task.wait() end
 end
